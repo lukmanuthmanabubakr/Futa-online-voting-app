@@ -2,8 +2,8 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const passport = require('passport');       // ✅ Needed globally
-const session = require('express-session'); // ✅ NEW
+const passport = require('passport');      
+const session = require('express-session'); 
 const connectDB = require('./config/db');
 
 dotenv.config();
@@ -15,20 +15,18 @@ app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-// ✅ Add this before passport middleware
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || 'keyboard cat', // Use a better secret in production
+    secret: process.env.SESSION_SECRET || 'keyboard cat',
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: false, // set true if using HTTPS
-      maxAge: 1000 * 60 * 10, // 10 minutes
+      secure: false,
+      maxAge: 1000 * 60 * 10,
     },
   })
 );
 
-// ✅ Required for passport-azure-ad to store state
 app.use(passport.initialize());
 app.use(passport.session());
 

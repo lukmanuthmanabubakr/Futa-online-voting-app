@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const User = require("../models/User");
 
-// 🔐 Passport serialization (required for session support)
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -19,7 +18,6 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-// 🧠 Setup Microsoft Azure OIDC strategy
 passport.use(
   new OIDCStrategy(
     {
@@ -57,17 +55,9 @@ passport.use(
   )
 );
 
-// 👇 This is now handled in server.js globally
-// router.use(passport.initialize());
-
-/**
- * Step 1: Redirect to Microsoft login
- */
 router.get("/microsoft", passport.authenticate("azuread-openidconnect"));
 
-/**
- * Step 2: Microsoft redirects back here
- */
+
 router.get("/microsoft/callback", (req, res, next) => {
   passport.authenticate("azuread-openidconnect", async (err, user, info) => {
     if (err) {
