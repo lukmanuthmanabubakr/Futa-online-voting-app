@@ -22,12 +22,6 @@ passport.deserializeUser(async (id, done) => {
 //   new OIDCStrategy(
 //     {
 //       : `https://login.microsoftonline.com/${process.env.AZURE_TENANT_ID}/v2.0/.well-known/openid-configuration`,
-//       clientID: process.env.AZURE_CLIENT_ID,
-//       clientSecret: process.env.AZURE_CLIENT_SECRET,
-//       allowHttpForRedirectUrl: true,
-//       passReqToCallback: false,
-//       scope: ["profile", "email", "openid"],
-//     },
 //     async (iss, sub, profile, accessToken, refreshToken, done) => {
 //             name: profile.displayName,
 //             email,
