@@ -21,7 +21,7 @@ passport.deserializeUser(async (id, done) => {
 // passport.use(
 //   new OIDCStrategy(
 //     {
-//       identityMetadata: `https://login.microsoftonline.com/${process.env.AZURE_TENANT_ID}/v2.0/.well-known/openid-configuration`,
+//       : `https://login.microsoftonline.com/${process.env.AZURE_TENANT_ID}/v2.0/.well-known/openid-configuration`,
 //       clientID: process.env.AZURE_CLIENT_ID,
 //       clientSecret: process.env.AZURE_CLIENT_SECRET,
 //       allowHttpForRedirectUrl: true,
