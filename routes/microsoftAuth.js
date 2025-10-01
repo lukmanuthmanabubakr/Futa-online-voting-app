@@ -18,42 +18,8 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-// passport.use(
-//   new OIDCStrategy(
-//     {
-//       identityMetadata: `https://login.microsoftonline.com/${process.env.AZURE_TENANT_ID}/v2.0/.well-known/openid-configuration`,
-//       clientID: process.env.AZURE_CLIENT_ID,
-//       clientSecret: process.env.AZURE_CLIENT_SECRET,
-//       responseType: "code",
-//       responseMode: "query",
-//       redirectUrl: process.env.AZURE_REDIRECT_URI,
-//       allowHttpForRedirectUrl: true,
-//       passReqToCallback: false,
-//       scope: ["profile", "email", "openid"],
-//     },
-//     async (iss, sub, profile, accessToken, refreshToken, done) => {
-//       try {
-//         console.log("✅ Profile received from Microsoft:", profile);
 
-//         const email = profile._json.preferred_username;
-//         let user = await User.findOne({ email });
 
-//         if (!user) {
-//           user = await User.create({
-//             name: profile.displayName,
-//             email,
-//             role: "student",
-//           });
-//         }
-
-//         return done(null, user);
-//       } catch (err) {
-//         console.error("❌ Error in OIDCStrategy callback:", err);
-//         return done(err, null);
-//       }
-//     }
-//   )
-// );
 
 passport.use(
   new OIDCStrategy(
@@ -79,12 +45,23 @@ passport.use(
 
         let user = await User.findOne({ email });
 
+        const adminEmails = [
+          "lukman-uthmanaarsg2022@futa.edu.ng",
+          // "sec.gen@futa.edu.ng",
+          // "admin1@futa.edu.ng"
+        ];
+
+        const role = adminEmails.includes(email.toLowerCase()) ? "admin" : "student";
+
         if (!user) {
           user = await User.create({
             name,
             email,
-            role: "student",
+            role
           });
+        } else if (!user.role) {
+          user.role = role;
+          await user.save();
         }
 
         return done(null, user);
@@ -95,6 +72,8 @@ passport.use(
     }
   )
 );
+
+
 
 router.get("/microsoft", passport.authenticate("azuread-openidconnect"));
 
