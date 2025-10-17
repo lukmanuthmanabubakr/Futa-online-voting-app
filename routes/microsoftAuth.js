@@ -33,7 +33,7 @@ passport.deserializeUser(async (id, done) => {
 //     },
 //     async (iss, sub, profile, accessToken, refreshToken, done) => {
 //       try {
-//         console.log("✅ Profile received from Microsoft:", profile);
+//         console.log(" Profile received from Microsoft:", profile);
 
 //         const email = profile._json.preferred_username;
 //         let user = await User.findOne({ email });
@@ -48,7 +48,7 @@ passport.deserializeUser(async (id, done) => {
 
 //         return done(null, user);
 //       } catch (err) {
-//         console.error("❌ Error in OIDCStrategy callback:", err);
+//         console.error(" Error in OIDCStrategy callback:", err);
 //         return done(err, null);
 //       }
 //     }
