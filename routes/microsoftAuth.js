@@ -41,14 +41,6 @@ passport.deserializeUser(async (id, done) => {
 //         if (!user) {
 //           user = await User.create({
 //             name: profile.displayName,
-
-
-//         return done(null, user);
-//       } catch (err) {
-//         console.error("❌ Error in OIDCStrategy callback:", err);
-//         return done(err, null);
-//       }
-//     }
 //   )
 // );
 
