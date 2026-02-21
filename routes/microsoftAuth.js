@@ -41,10 +41,7 @@ passport.deserializeUser(async (id, done) => {
 //         if (!user) {
 //           user = await User.create({
 //             name: profile.displayName,
-//             email,
-//             role: "student",
-//           });
-//         }
+
 
 //         return done(null, user);
 //       } catch (err) {
