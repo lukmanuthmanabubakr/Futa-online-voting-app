@@ -81,7 +81,7 @@ passport.use(
 
         return done(null, user);
       } catch (err) {
-        console.error("❌ Error in strategy:", err);
+        console.error("Error in strategy:", err);
         return done(err, null);
       }
     }
@@ -95,7 +95,7 @@ router.get("/microsoft", passport.authenticate("azuread-openidconnect"));
 router.get("/microsoft/callback", (req, res, next) => {
   passport.authenticate("azuread-openidconnect", async (err, user, info) => {
     if (err) {
-      console.error("❌ Passport Error:", err);
+      console.error(" Passport Error:", err);
       return res.redirect("/auth/error");
     }
 
