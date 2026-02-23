@@ -100,17 +100,17 @@ router.get("/microsoft/callback", (req, res, next) => {
     }
 
     if (!user) {
-      console.error("❌ No user returned. Info:", info);
+      console.error("No user returned. Info:", info);
       return res.redirect("/auth/error");
     }
 
     req.logIn(user, (err) => {
       if (err) {
-        console.error("❌ Login error:", err);
+        console.error("Login error:", err);
         return res.redirect("/auth/error");
       }
 
-      // ✅ Generate JWT
+      // Generate JWT
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
         expiresIn: "1d",
       });
@@ -143,7 +143,7 @@ router.get("/me", async (req, res) => {
 });
 
 router.get("/error", (req, res) => {
-  res.send("❌ Authentication failed. Check your terminal logs for details.");
+  res.send("Authentication failed. Check your terminal logs for details.");
 });
 
 module.exports = router;
