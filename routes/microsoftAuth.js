@@ -25,10 +25,6 @@ passport.deserializeUser(async (id, done) => {
 //     },
 //     async (iss, sub, profile, accessToken, refreshToken, done) => {
 //       try {
-//         console.log(" Profile received from Microsoft:", profile);
-//         if (!user) {
-//           user = await User.create({
-//             name: profile.displayName,
 //   )
 // );
 
