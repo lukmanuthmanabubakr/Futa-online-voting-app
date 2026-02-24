@@ -26,10 +26,6 @@ passport.deserializeUser(async (id, done) => {
 //     async (iss, sub, profile, accessToken, refreshToken, done) => {
 //       try {
 //         console.log(" Profile received from Microsoft:", profile);
-
-//         const email = profile._json.preferred_username;
-//         let user = await User.findOne({ email });
-
 //         if (!user) {
 //           user = await User.create({
 //             name: profile.displayName,
